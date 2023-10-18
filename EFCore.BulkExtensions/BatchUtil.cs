@@ -462,7 +462,7 @@ namespace EFCore.BulkExtensions
 
             // will rely on SqlClientHelper.CorrectParameterType to fix the type before executing
             var sqlParameter = TryCreateRelationalMappingParameter(columnName, paramName, value, tableInfo)
-                ?? new Microsoft.Data.SqlClient.SqlParameter(paramName, value ?? DBNull.Value);
+                ?? new System.Data.SqlClient.SqlParameter(paramName, value ?? DBNull.Value);
 
             sqlParameters.Add(sqlParameter);
             sqlColumns.Append($" {paramName}");
@@ -485,7 +485,7 @@ namespace EFCore.BulkExtensions
             {
                 var relationalTypeMapping = propertyInfo.GetRelationalTypeMapping();
 
-                using var dbCommand = new Microsoft.Data.SqlClient.SqlCommand();
+                using var dbCommand = new System.Data.SqlClient.SqlCommand();
                 return relationalTypeMapping.CreateParameter(dbCommand, parameterName, value, propertyInfo.IsNullable);
             }
             catch (Exception) { }

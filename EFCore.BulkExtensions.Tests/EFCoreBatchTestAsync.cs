@@ -71,11 +71,11 @@ namespace EFCore.BulkExtensions.Tests
             var executedCommand = dbCommandInterceptor.ExecutedNonQueryCommands.Last();
             Assert.Equal(2, executedCommand.DbParameters.Count);
 
-            var oldPhoneNumberParameter = (Microsoft.Data.SqlClient.SqlParameter)executedCommand.DbParameters.Single(param => param.ParameterName == "@__oldPhoneNumber_0");
+            var oldPhoneNumberParameter = (System.Data.SqlClient.SqlParameter)executedCommand.DbParameters.Single(param => param.ParameterName == "@__oldPhoneNumber_0");
             Assert.Equal(System.Data.DbType.AnsiString, oldPhoneNumberParameter.DbType);
             Assert.Equal(System.Data.SqlDbType.VarChar, oldPhoneNumberParameter.SqlDbType);
 
-            var newPhoneNumberParameter = (Microsoft.Data.SqlClient.SqlParameter)executedCommand.DbParameters.Single(param => param.ParameterName == "@param_1");
+            var newPhoneNumberParameter = (System.Data.SqlClient.SqlParameter)executedCommand.DbParameters.Single(param => param.ParameterName == "@param_1");
             Assert.Equal(System.Data.DbType.AnsiString, newPhoneNumberParameter.DbType);
             Assert.Equal(System.Data.SqlDbType.VarChar, newPhoneNumberParameter.SqlDbType);
 
