@@ -1,5 +1,4 @@
 ﻿using EFCore.BulkExtensions.SQLAdapters.SQLite;
-using EFCore.BulkExtensions.SQLAdapters.SQLServer;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
@@ -18,15 +17,13 @@ namespace EFCore.BulkExtensions.SqlAdapters
         public static readonly Dictionary<DbServer, ISqlOperationsAdapter> SqlOperationAdapterMapping =
             new Dictionary<DbServer, ISqlOperationsAdapter>
             {
-                {DbServer.Sqlite, new SqLiteOperationsAdapter()},
-                {DbServer.SqlServer, new SqlOperationsServerAdapter()}
+                {DbServer.Sqlite, new SqLiteOperationsAdapter()}
             };
 
         public static readonly Dictionary<DbServer, IQueryBuilderSpecialization> SqlQueryBuilderSpecializationMapping =
             new Dictionary<DbServer, IQueryBuilderSpecialization>
             {
-                {DbServer.Sqlite, new SqLiteDialect()},
-                {DbServer.SqlServer, new SqlServerDialect()}
+                {DbServer.Sqlite, new SqLiteDialect()}
             };
 
         public static ISqlOperationsAdapter CreateBulkOperationsAdapter(DbContext context)

@@ -5,7 +5,7 @@ namespace EFCore.BulkExtensions
 {
     /// <summary>
     /// Provides helper functionality to support both System.Data.SqlClient
-    /// and Microsoft.Data.SqlClient
+    /// and System.Data.SqlClient
     /// </summary>
     public static class SqlClientHelper
     {
@@ -33,7 +33,7 @@ namespace EFCore.BulkExtensions
             }
             else
             {
-                return typeof(Microsoft.Data.SqlClient.SqlParameter);
+                return typeof(System.Data.SqlClient.SqlParameter);
             }
         }
 
@@ -65,13 +65,13 @@ namespace EFCore.BulkExtensions
             newParameter.Value = parameter.Value;
             newParameter.DbType = parameter.DbType;
 
-            if (parameter is Microsoft.Data.SqlClient.SqlParameter microsoftSqlParameter
+            if (parameter is System.Data.SqlClient.SqlParameter microsoftSqlParameter
                 && newParameter is System.Data.SqlClient.SqlParameter newSystemSqlParameter)
             {
                 newSystemSqlParameter.SqlDbType = microsoftSqlParameter.SqlDbType;
             }
             else if(parameter is System.Data.SqlClient.SqlParameter systemSqlParameter
-                && newParameter is Microsoft.Data.SqlClient.SqlParameter newMicrosoftSqlParameter)
+                && newParameter is System.Data.SqlClient.SqlParameter newMicrosoftSqlParameter)
             {
                 newMicrosoftSqlParameter.SqlDbType = systemSqlParameter.SqlDbType;
             }
@@ -84,7 +84,7 @@ namespace EFCore.BulkExtensions
         /// </summary>
         /// <param name="connection"></param>
         /// <returns>true if the connection is System.Data.SqlClient.SqlConnection; otherwise, 
-        /// returns false, indicating that it is Microsoft.Data.SqlClient.SqlConnection.</returns>
+        /// returns false, indicating that it is System.Data.SqlClient.SqlConnection.</returns>
         internal static bool IsSystemConnection(IDbConnection connection)
         {
             if (connection.GetType() == typeof(System.Data.SqlClient.SqlConnection))
